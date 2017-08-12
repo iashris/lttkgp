@@ -1,5 +1,6 @@
 var express = require('express')
 var app = express()
+app.set('port', (process.env.PORT || 5000));
 var graph = require('fbgraph');
 var hbs=require('express-handlebars');
 graph.setAccessToken("EAACZCGzCLR30BAK2bI6BvzVvUHa5jhZBHzhbavXIIi4XwaA8K8GvU3gZAdhhYquhowuJUWOfbjanITbKyqLWJlSzN9yGNM7Ov11C5ORWRzGHzrXmfGxTGYJCzMVtZBwh2zs9tI4jtMGBA9tZBuhdJcduOa2ArHdMZD");
@@ -31,10 +32,9 @@ app.get('/generate',function(reqa,resa){
 });
 
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-})
-
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
 
 function DoItForToday(reqq,ress,next){
 
