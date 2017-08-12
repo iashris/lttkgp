@@ -54,20 +54,24 @@ function DoItForToday(reqq,ress,next){
 
 		for(var j=0;j<10;j++){
 			var albumnode=res.data[parseInt(res.data.length*Math.random())];
-			graph.get(albumnode.id+"/photos", function(err, photores) {
+			graph.get(albumnode.id+"/photos?fields=images,name,album,link,from", function(err, photores) {
+
+				//do this block for 5times
 				for(var i=0;i<5;i++){
-					var randomphotonum=photores.data[parseInt(photores.data.length*Math.random())];
-					graph.get(randomphotonum.id+"?fields=images,name,album,link,from", function(err, respo) {
-						var linko=respo.images[0].source;
-						if(respo.images[0].width>respo.images[0].height)Images.push({photosource:linko,albumname:respo.album.name,photopage:respo.from.name,photocaption:respo.name,photolink:respo.link});
-						if(Images.length==22){next()}
-				});
-				}
-				});
+			var randomphotonum=parseInt(photores.data.length*Math.random());
+
+			var nodepp=photores.data[randomphotonum];
+			var linko=nodepp.images[0].source;
+			if(nodepp.images[0].width>nodepp.images[0].height)Images.push({photosource:linko,albumname:nodepp.album.name,photopage:nodepp.from.name,photolink:nodepp.link});
+		
+			if(Images.length==22){next()}
 		}
+
+
 		});
+		}
 
-
+});
 		daySetter=new Date().getTime();
 		console.log('Daysetter now is ',daySetter);
 		
