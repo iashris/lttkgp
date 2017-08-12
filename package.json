@@ -4,7 +4,8 @@
   "description": "A nodejs server to fetch latest post from the public group",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start":"node index.js"
   },
   "author": "iashris",
   "license": "ISC",

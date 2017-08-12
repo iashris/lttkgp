@@ -10,7 +10,7 @@ app.set('view engine','hbs');
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function (req, res) {
-  res.render("index",{linkid:"5iiPC-VGFLU"});
+  res.send('Hello world');
 })
 
 var daySetter=0;var daySetterx=0;
@@ -38,8 +38,7 @@ app.listen(3000, function () {
 
 function DoItForToday(reqq,ress,next){
 
-	console.log("Me was called");
-	console.log("daySetter is ",daySetter);
+
 	var timenow=new Date().getTime();
 	if(timenow-daySetter>1342022){
 	//Parse Listen To This KGP for latest 30 posts and then store the video links into them.
@@ -64,7 +63,6 @@ function DoItForToday(reqq,ress,next){
 						var linko=respo.images[0].source;
 						if(respo.images[0].width>respo.images[0].height)Images.push({photosource:linko,albumname:respo.album.name,photopage:respo.from.name,photocaption:respo.name,photolink:respo.link});
 						if(Images.length==22){next()}
-						else{console.log("Images: "+Images.length);}
 				});
 				}
 				});
@@ -114,13 +112,11 @@ function DoItForToday2(reqq,ress,next){
 		//fetched the results is res.data
 			Musics=res.data;
 			Musics.forEach(function(v,i){
-				console.log(v);
 				var poster=v.story.split(' ').slice(0,2).join(' ');
 				//console.log(v.poster);
 				var a=youtube_parser(v.link);
 				if(a!=false){Musicsa.push({"link":a,"poster":poster,"message":v.message,"howago":howago(v.updated_time),"title":v.attachments.data[0].title,"perma":v.permalink_url})}
 				if(Musicsa.length==20){next()}
-				console.log("Musicsa length "+Musicsa.length);
 				//resa.render('index',{linkid:link},{wallp:wallpaper});
 
 			});
