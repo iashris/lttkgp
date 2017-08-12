@@ -105,17 +105,19 @@ function DoItForToday2(reqq,ress,next){
 	var timenow=new Date().getTime();
 	if(timenow-daySetterx>1342022){
 		Musicsa=[];
-		graph.get("/1488511748129645/feed?fields=permalink_url,attachments,story,link,message,updated_time&limit=30", function(err, res) {
+		graph.get("/1488511748129645/feed?fields=permalink_url,attachments,story,link,message,updated_time&limit=60", function(err, res) {
 	  
 		//fetched the results is res.data
 			Musics=res.data;
 			Musics.forEach(function(v,i){
+				if(v.story){
 				var poster=v.story.split(' ').slice(0,2).join(' ');
 				//console.log(v.poster);
 				var a=youtube_parser(v.link);
 				if(a!=false){Musicsa.push({"link":a,"poster":poster,"message":v.message,"howago":howago(v.updated_time),"title":v.attachments.data[0].title,"perma":v.permalink_url})}
 				if(Musicsa.length==20){next()}
 				//resa.render('index',{linkid:link},{wallp:wallpaper});
+		}
 
 			});
 		});
