@@ -11,7 +11,7 @@ app.set('view engine','hbs');
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function (req, res) {
-  res.send('Hello world');
+  res.send('Heyo curious friend, sorry to interrupt you in your investigative venture. If you are trying to look for the source code, it is on Github under the account iashris in the repo lttkgp and brace yourself for some really weird variable names in code. I made this project to take a break from the nervewrecking AR/VR project I am doing now now. So as a gift for finding this easter egg, here\'s an awesome short film I watched yesterday  : https://www.youtube.com/watch?v=0krwKbsQscw This will blow your mind');
 })
 
 var daySetter=0;var daySetterx=0;
