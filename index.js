@@ -45,11 +45,9 @@ function DoItForToday(reqq,ress,next){
 
 
 	//Now pick a random album of a photography page
-	var PHOTOGRAPHY=[{"name":"Click KGP","link":"https://www.facebook.com/clickkgp/","id":"187392001335138"},
-					{"name":"Paras Prateek Fotografia","link":"https://www.facebook.com/parasprateekfotografia/","id":"431982946812424"},
-					{"name":"Mayank Choudhary's Photography","link":"https://www.facebook.com/mayank.photography/","id":"179692545405825"}];
+	var PHOTOGRAPHY=["187392001335138","431982946812424","179692545405825","1389536757943518","453979384633804","637309269662192","1684834808457693"];
 	pickedsource=PHOTOGRAPHY[parseInt(PHOTOGRAPHY.length*Math.random())];
-	graph.get(pickedsource.id+"/albums?limit=20", function(err, res) {
+	graph.get(pickedsource+"/albums?limit=20", function(err, res) {
 	  
 		//fetched the results is res.data
 		Images=[];
