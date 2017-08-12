@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+</head>
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+<style type="text/css">
+	html,body{
+		overflow: hidden;
+		font-family: 'Josefin Sans';
+		color:white;
+		background: black;
+	}
+#backgroundimage{
+
+   height: auto;
+   left: 0;
+   margin: 0;
+   min-height: 100%;
+   padding: 0;
+   position: fixed;
+   bottom:-17%;
+   width: 100%;
+   z-index: -1;
+   object-fit: cover
+}
+a{
+	color:white;
+}
+h3:hover{
+	background-color: rgba(255,82,82,0.8);
+	transition: 0.5s;
+	color: white;
+
+}
+h3{
+	padding:15px 25px;
+	border:2px solid white;
+	display: inline-block;
+	color:white;
+	background-color: rgba(255,255,255,0.4);
+	border-radius: 100px;
+	cursor: pointer;
+}
+.centered-thing {
+    position: absolute;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.whitish{
+	background-color: rgba(255,255,255,0.3);
+	text-align: center;
+	padding:20px 20px 20px 20px;
+}
+.theysay{
+	margin-top: 50px;
+}
+img{
+	opacity: 0.4;
+}
+#footer {
+   position:fixed;
+   left:0px;
+   bottom:60px;
+   height:30px;
+   width:100%;
+   text-align: center;
+   opacity: 0.7;
+}
+
+</style>
+<body>
+{{{body}}}
+</body>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+$("#labtn").click(function(e) {
+      e.preventDefault();
+      $('.intro').html('');
+      var src = "https://www.youtube.com/embed/"+$(this).attr('href')+"?iv_load_policy=3&rel=0&showsearch=0&theme=light&autoplay=1";
+
+      $('#iframe1').fadeOut(2000,function(){
+          $('#iframe1').attr('src',src ).load(function(){
+              $(this).fadeIn(2000);    
+          });
+      });
+      $('.theysay').css('visibility','visible');
+
+ });
+
+</script>
+</html>
