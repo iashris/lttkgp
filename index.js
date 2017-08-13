@@ -18,11 +18,11 @@ var daySetter=0;var daySetterx=0;
 var Musicsa=[];
 var Images=[];
 
-app.use(DoItForToday);
-app.use(DoItForToday2);
-app.get('/generate',function(reqa,resa){
+
+app.get('/generate',[DoItForToday,DoItForToday2],function(reqa,resa){
 //check if the data for today is set. 
 //console.log('musics are',Musics);
+
 	var pickmusic=Musicsa[parseInt(Musicsa.length*Math.random())];
 	var pickimg=Images[parseInt(Images.length*Math.random())];
 	//resa.render('index',{songtime:555})
@@ -38,12 +38,10 @@ app.listen(app.get('port'), function() {
 
 function DoItForToday(reqq,ress,next){
 
-
+	var firstbool=false;
 	var timenow=new Date().getTime();
 	if(timenow-daySetter>80542022){
 	//Parse Listen To This KGP for latest 30 posts and then store the video links into them.
-
-
 	//Now pick a random album of a photography page
 	var PHOTOGRAPHY=["187392001335138","431982946812424","179692545405825","1389536757943518","453979384633804","637309269662192","1684834808457693"];
 	pickedsource=PHOTOGRAPHY[parseInt(PHOTOGRAPHY.length*Math.random())];
@@ -51,7 +49,6 @@ function DoItForToday(reqq,ress,next){
 	  
 		//fetched the results is res.data
 		Images=[];
-
 		for(var j=0;j<10;j++){
 			var albumnode=res.data[parseInt(res.data.length*Math.random())];
 			graph.get(albumnode.id+"/photos?fields=images,name,album,link,from", function(err, photores) {
@@ -59,12 +56,11 @@ function DoItForToday(reqq,ress,next){
 				//do this block for 5times
 				for(var i=0;i<5;i++){
 			var randomphotonum=parseInt(photores.data.length*Math.random());
-
 			var nodepp=photores.data[randomphotonum];
 			var linko=nodepp.images[0].source;
-			if(nodepp.images[0].width>nodepp.images[0].height)Images.push({photosource:linko,albumname:nodepp.album.name,photopage:nodepp.from.name,photolink:nodepp.link});
-		
-			if(Images.length==22){next()}
+			if(nodepp.images[0].width>nodepp.images[0].height && !Images.some(function(el){el.photosource===linko}))Images.push({photosource:linko,albumname:nodepp.album.name,photopage:nodepp.from.name,photolink:nodepp.link});
+			//console.log('Images is ',Images.length);
+			if(Images.length>=25 && !firstbool){firstbool=true;next();}
 		}
 
 
@@ -107,9 +103,10 @@ function youtube_parser(url){
 }
 function DoItForToday2(reqq,ress,next){
 	var timenow=new Date().getTime();
+	var secondbool=false;
 	if(timenow-daySetterx>80542022){
 		Musicsa=[];
-		graph.get("/1488511748129645/feed?fields=permalink_url,attachments,story,link,message,updated_time&limit=60", function(err, res) {
+		graph.get("/1488511748129645/feed?fields=permalink_url,attachments,story,link,message,updated_time&limit=50", function(err, res) {
 	  
 		//fetched the results is res.data
 			Musics=res.data;
@@ -118,8 +115,9 @@ function DoItForToday2(reqq,ress,next){
 				var poster=v.story.split(' ').slice(0,2).join(' ');
 				//console.log(v.poster);
 				var a=youtube_parser(v.link);
-				if(a!=false){Musicsa.push({"link":a,"poster":poster,"message":v.message,"howago":howago(v.updated_time),"title":v.attachments.data[0].title,"perma":v.permalink_url})}
-				if(Musicsa.length==20){next()}
+				if(a!=false && !Musicsa.some(function(el){return el.link===a}) ){Musicsa.push({"link":a,"poster":poster,"message":v.message,"howago":howago(v.updated_time),"title":v.attachments.data[0].title,"perma":v.permalink_url})}
+				//console.log('Musicsa is ',Musicsa.length);
+				if(Musicsa.length==30 && !secondbool){secondbool=true;next()}
 				//resa.render('index',{linkid:link},{wallp:wallpaper});
 		}
 
