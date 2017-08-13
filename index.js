@@ -40,7 +40,7 @@ function DoItForToday(reqq,ress,next){
 
 
 	var timenow=new Date().getTime();
-	if(timenow-daySetter>1342022){
+	if(timenow-daySetter>80542022){
 	//Parse Listen To This KGP for latest 30 posts and then store the video links into them.
 
 
@@ -107,7 +107,7 @@ function youtube_parser(url){
 }
 function DoItForToday2(reqq,ress,next){
 	var timenow=new Date().getTime();
-	if(timenow-daySetterx>1342022){
+	if(timenow-daySetterx>80542022){
 		Musicsa=[];
 		graph.get("/1488511748129645/feed?fields=permalink_url,attachments,story,link,message,updated_time&limit=60", function(err, res) {
 	  
