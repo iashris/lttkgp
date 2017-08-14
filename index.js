@@ -17,6 +17,7 @@ app.get('/', function (req, res) {
 var daySetter=0;var daySetterx=0;
 var Musicsa=[];
 var Images=[];
+var TIMECONS=1800000;
 
 
 app.get('/generate',[DoItForToday,DoItForToday2],function(reqa,resa){
@@ -40,7 +41,7 @@ function DoItForToday(reqq,ress,next){
 
 	var firstbool=false;
 	var timenow=new Date().getTime();
-	if(timenow-daySetter>80542022){
+	if(timenow-daySetter>TIMECONS){
 	//Parse Listen To This KGP for latest 30 posts and then store the video links into them.
 	//Now pick a random album of a photography page
 	var PHOTOGRAPHY=["187392001335138","431982946812424","179692545405825","1389536757943518","453979384633804","637309269662192","1684834808457693"];
@@ -104,7 +105,7 @@ function youtube_parser(url){
 function DoItForToday2(reqq,ress,next){
 	var timenow=new Date().getTime();
 	var secondbool=false;
-	if(timenow-daySetterx>80542022){
+	if(timenow-daySetterx>TIMECONS){
 		Musicsa=[];
 		graph.get("/1488511748129645/feed?fields=permalink_url,attachments,story,link,message,updated_time&limit=50", function(err, res) {
 	  
