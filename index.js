@@ -18,7 +18,7 @@ var daySetter=0;var daySetterx=0;
 var Musicsa=[];
 var Images=[];
 var TIMECONS=1800000;
-
+var albumoverride="1540526402688351";
 
 app.get('/generate',[DoItForToday,DoItForToday2],function(reqa,resa){
 //check if the data for today is set. 
@@ -60,8 +60,9 @@ function DoItForToday(reqq,ress,next){
 		//fetched the results is res.data
 		Images=[];
 		for(var j=0;j<10;j++){
-			var albumnode=res.data[parseInt(res.data.length*Math.random())];
-			graph.get(albumnode.id+"/photos?fields=images,name,album,link,from", function(err, photores) {
+			var albumid=res.data[parseInt(res.data.length*Math.random())].id;
+			if(albumoverride!=undefined)albumid=albumoverride; //override custom album
+			graph.get(albumid+"/photos?fields=images,name,album,link,from", function(err, photores) {
 
 				//do this block for 5times
 				for(var i=0;i<5;i++){
