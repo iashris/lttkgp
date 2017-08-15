@@ -35,7 +35,7 @@ app.get('/reboot',function(reqa,resa){
 //check if the data for today is set. 
 //console.log('musics are',Musics);
 
-	var daySetter=0;var daySetterx=0;
+	daySetter=0;daySetterx=0;
 	//resa.render('index',{songtime:555})
 	
 	return resa.send('All files reinitialized.');
