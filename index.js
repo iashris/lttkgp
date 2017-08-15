@@ -31,6 +31,15 @@ app.get('/generate',[DoItForToday,DoItForToday2],function(reqa,resa){
 	else songmsg=pickmusic.message;
 	return resa.render('index',{"postername":pickmusic.poster.split(' ')[0],"songlink":pickmusic.link,"songposter":pickmusic.poster,"title":pickmusic.title,"howago":pickmusic.howago,"songmsg":songmsg,"photosource":pickimg.photosource,"photoalbum":pickimg.albumname,"photopage":pickimg.photopage,"photolink":pickimg.photolink,"perma":pickmusic.perma});
 });
+app.get('/reboot',function(reqa,resa){
+//check if the data for today is set. 
+//console.log('musics are',Musics);
+
+	var daySetter=0;var daySetterx=0;
+	//resa.render('index',{songtime:555})
+	
+	return resa.send('All files reinitialized.');
+});
 
 
 app.listen(app.get('port'), function() {
