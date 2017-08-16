@@ -125,6 +125,7 @@ function DoItForToday2(reqq,ress,next){
 				if(v.story){
 				var poster=v.story.split(' ').slice(0,2).join(' ');
 				//console.log(v.poster);
+				if(!v.link)return;
 				var a=youtube_parser(v.link);
 				if(a!=false && !Musicsa.some(function(el){return el.link===a}) ){Musicsa.push({"link":a,"poster":poster,"message":v.message,"howago":howago(v.updated_time),"title":v.attachments.data[0].title,"perma":v.permalink_url})}
 				//console.log('Musicsa is ',Musicsa.length);
