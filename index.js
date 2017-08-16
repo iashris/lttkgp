@@ -107,7 +107,7 @@ function howago(d){
 var timesofar=new Date().getTime()-Date.parse(d);
 return msToDHM(timesofar);
 }
-function youtube_parser(url){
+var youtube_parser=function(url){
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
     return (match&&match[7].length==11)? match[7] : false;
