@@ -31,6 +31,29 @@ app.get('/generate',[DoItForToday,DoItForToday2],function(reqa,resa){
 	else songmsg=pickmusic.message;
 	return resa.render('index',{"postername":pickmusic.poster.split(' ')[0],"songlink":pickmusic.link,"songposter":pickmusic.poster,"title":pickmusic.title,"howago":pickmusic.howago,"songmsg":songmsg,"photosource":pickimg.photosource,"photoalbum":pickimg.albumname,"photopage":pickimg.photopage,"photolink":pickimg.photolink,"perma":pickmusic.perma});
 });
+app.get('/serve',[DoItForToday,DoItForToday2],function(reqa,resa){
+//check if the data for today is set. 
+//console.log('musics are',Musics);
+
+	var pickmusic=Musicsa[parseInt(Musicsa.length*Math.random())];
+	var pickimg=Images[parseInt(Images.length*Math.random())];
+	//resa.render('index',{songtime:555})
+	if(pickmusic.message=="")songmsg="this is dedicated to mah Prof who I have a crush on.";
+	else songmsg=pickmusic.message;
+	return resa.send({"postername":pickmusic.poster.split(' ')[0],"songlink":pickmusic.link,"songposter":pickmusic.poster,"title":pickmusic.title,"howago":pickmusic.howago,"songmsg":songmsg,"photosource":pickimg.photosource,"photoalbum":pickimg.albumname,"photopage":pickimg.photopage,"photolink":pickimg.photolink,"perma":pickmusic.perma});
+});
+
+app.get('/broadcast/:id',function(reqa,resa){
+//check if the data for today is set. 
+//console.log('musics are',Musics);
+
+	var ytid=reqa.params.id;
+	resa.send('<iframe width="560" height="395" src="https://www.youtube.com/embed/'+ytid+'?ecver=1&autoplay=1" frameborder="0" autoplay="autoplay" allowfullscreen></iframe>')
+});
+
+
+
+
 app.get('/reboot',function(reqa,resa){
 //check if the data for today is set. 
 //console.log('musics are',Musics);
@@ -64,6 +87,8 @@ function DoItForToday(reqq,ress,next){
 			if(albumoverride!=undefined)albumid=albumoverride; //override custom album/
 			graph.get(albumid+"/photos?fields=images,name,album,link,from", function(err, photores) {
 
+
+			//pick all images
 				//do this block for 5times
 				for(var i=0;i<5;i++){
 			var randomphotonum=parseInt(photores.data.length*Math.random());
